@@ -7,8 +7,9 @@ using System.Windows.Forms;
 using xpressive.Wcf.Extensions.ServiceHeartbeat;
 
 namespace Broadcaster.Client.WinForms {
-    public partial class ServiceClientWindow : Form, IBroadcastServiceCallback {
-
+    public partial class ServiceClientWindow : Form, IBroadcastServiceCallback
+    {
+        private const string ServiceAddress = "net.tcp://127.0.0.1:7007/broadcaster/Service";
         readonly Action<string> _receiveMessageDelegate;
         readonly BindingList<ServiceMessage> _receivedMessages;
         readonly InstanceContext _serviceHost;
@@ -27,7 +28,7 @@ namespace Broadcaster.Client.WinForms {
             receivedMessageList.DisplayMember = "Text";
 
             _serviceHost = new InstanceContext(null, this);
-            _heartbeatClient = new ServiceHeartbeatClient("net.tcp://127.0.0.1:7007/broadcaster/Service", xpressive.Wcf.Extensions.Channels.TransportMode.Msmq, new TimeSpan(0, 0, 30));
+            _heartbeatClient = new ServiceHeartbeatClient(ServiceAddress, xpressive.Wcf.Extensions.Channels.TransportMode.Msmq, new TimeSpan(0, 0, 30));
             _heartbeatClient.ServiceStatusChanged += _heartbeatClient_ServiceStatusChanged;
 
             if (_client == null ||
