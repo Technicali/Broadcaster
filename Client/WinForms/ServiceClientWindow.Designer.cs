@@ -75,7 +75,7 @@
             this.btnSend.TabIndex = 1;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            this.btnSend.Click += new System.EventHandler(this.BtnSendClick);
             // 
             // txtMessage
             // 
@@ -119,7 +119,7 @@
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnClose.Click += new System.EventHandler(this.BtnCloseClick);
             // 
             // btnUnsubscribe
             // 
@@ -135,7 +135,7 @@
             this.btnUnsubscribe.TabIndex = 5;
             this.btnUnsubscribe.Text = "Unsubscribe";
             this.btnUnsubscribe.UseVisualStyleBackColor = true;
-            this.btnUnsubscribe.Click += new System.EventHandler(this.btnUnsubscribe_Click);
+            this.btnUnsubscribe.Click += new System.EventHandler(this.BtnUnsubscribeClick);
             // 
             // btnSubscribe
             // 
@@ -151,7 +151,7 @@
             this.btnSubscribe.TabIndex = 4;
             this.btnSubscribe.Text = "Subscribe";
             this.btnSubscribe.UseVisualStyleBackColor = true;
-            this.btnSubscribe.Click += new System.EventHandler(this.btnSubscribe_Click);
+            this.btnSubscribe.Click += new System.EventHandler(this.BtnSubscribeClick);
             // 
             // ServiceClientWindow
             // 
@@ -168,7 +168,7 @@
             this.MinimizeBox = false;
             this.Name = "ServiceClientWindow";
             this.Text = "Broadcast Service Client";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ServiceClientWindow_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ServiceClientWindowFormClosing);
             this.sendingFrame.ResumeLayout(false);
             this.sendingFrame.PerformLayout();
             this.groupBox1.ResumeLayout(false);
