@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.ServiceModel;
-using System.Threading;
 using System.Windows.Forms;
 using xpressive.Wcf.Extensions.ServiceHeartbeat;
 
