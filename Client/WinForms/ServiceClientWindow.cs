@@ -21,14 +21,14 @@ namespace Broadcaster.Client.WinForms {
         {
             InitializeComponent();
 
-            _receiveMessageDelegate = this.ReceiveMessage;
+            _receiveMessageDelegate = ReceiveMessage;
             _receivedMessages = new BindingList<ServiceMessage>();
             receivedMessageList.DataSource = _receivedMessages;
             receivedMessageList.DisplayMember = "Text";
 
             _serviceHost = new InstanceContext(null, this);
             _heartbeatClient = new ServiceHeartbeatClient(ServiceAddress, xpressive.Wcf.Extensions.Channels.TransportMode.Msmq, new TimeSpan(0, 0, 30));
-            _heartbeatClient.ServiceStatusChanged += _heartbeatClient_ServiceStatusChanged;
+            _heartbeatClient.ServiceStatusChanged += HeartbeatClientServiceStatusChanged;
 
             if (_client == null ||
                 _client.State != CommunicationState.Opened)
@@ -37,15 +37,15 @@ namespace Broadcaster.Client.WinForms {
             }
         }
 
-        void _heartbeatClient_ServiceStatusChanged(object sender, EventArgs e) {
+        void HeartbeatClientServiceStatusChanged(object sender, EventArgs e) {
             ServiceRunning = _heartbeatClient.ServiceStatus == ServiceHeartbeatClient.HeartbeatServiceStatus.Running;
         }
 
-        private void btnSend_Click(object sender, EventArgs e) {
+        private void BtnSendClick(object sender, EventArgs e) {
             _client.BeginNotify(
                 _clientId,
                 txtMessage.Text,
-                (ar) => {
+                ar => {
                     _client.EndNotify(ar);
                     ClearMessageTextBox();
                 },
@@ -94,11 +94,11 @@ namespace Broadcaster.Client.WinForms {
             }
         }
 
-        private void btnClose_Click(object sender, EventArgs e) {
+        private void BtnCloseClick(object sender, EventArgs e) {
             Close();
         }
 
-        private void btnSubscribe_Click(object sender, EventArgs e) {
+        private void BtnSubscribeClick(object sender, EventArgs e) {
             Subscribe();
 
             txtMessage.Enabled = true;
@@ -107,7 +107,7 @@ namespace Broadcaster.Client.WinForms {
             btnUnsubscribe.Enabled = true;
         }
 
-        private void btnUnsubscribe_Click(object sender, EventArgs e) {
+        private void BtnUnsubscribeClick(object sender, EventArgs e) {
             Unsubscribe();
 
             txtMessage.Enabled = false;
@@ -116,9 +116,9 @@ namespace Broadcaster.Client.WinForms {
             btnUnsubscribe.Enabled = false;
         }
 
-        private void ServiceClientWindow_FormClosing(object sender, FormClosingEventArgs e) {
+        private void ServiceClientWindowFormClosing(object sender, FormClosingEventArgs e) {
 
-            _heartbeatClient.ServiceStatusChanged -= _heartbeatClient_ServiceStatusChanged;
+            _heartbeatClient.ServiceStatusChanged -= HeartbeatClientServiceStatusChanged;
             _heartbeatClient.Dispose();
 
             if (e.CloseReason != CloseReason.TaskManagerClosing) {
