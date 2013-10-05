@@ -1,0 +1,1 @@
+svcutil net.tcp://localhost:7007/broadcaster/Service/mex /n:*,Broadcaster.Client /o:D:\Projects\Broadcaster\Client\BroadcastServiceClient.cs /a
